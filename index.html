@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tomogatchi</title>
+    <link rel= "stylesheet" href="css/main.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/2.0.5/velocity.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/2.0.5/velocity.ui.js"></script>
+</head>
+<body>
+    <div class="start-screen">
+        <h1 id="welcome">Tomagotchi</h1>
+        <div id="startButton">
+            <button id="start-game" class="strart-button">Start Game</button>
+        </div>
+    </div>
+
+    <div class="game">
+        <div id="pet">
+            <img src="./images/bird-animate.gif" id="pet-live" >
+        </div>
+
+        <div id="feedButton">
+            <button class="feed-me">Feed Me!</button>
+        </div>
+        <div id="lightButton">
+            <button class="light">Light ON/OFF</button>
+        </div>
+
+        <div id="progress">
+            <h3>Age: <span id="age-num"></span></h3>
+
+            <h3>Hunger: </h3>
+            <div id="hunger-score-bar"><span id="hunger"></span></div>
+
+            <h3>Sleep:</h3>
+            <div id="sleep-score-bar"><span id="sleep"></span></div>
+
+            <h3>Boredom:</h3>
+            <div id="boredom-score-bar"><span id="boredom"></span></div>
+        </div>
+        
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>     
