@@ -26,7 +26,16 @@ const stopTimer = () => {
 const dieFunction = (string) => {
     alert(`${tomagotchi.name} died from ${string} !!`);
     stopTimer();
+}
 
+const morphIt = () => {
+
+    $('#pet-live').fadeOut(()=>{
+        $('#pet-live').attr('src', "images/morph.gif")
+        $('#pet-live').fadeIn();
+    });
+
+    morphFlag = true;
 }
 
 const increaseHunger = () => {
@@ -57,9 +66,9 @@ const increaseAge = () => {
     ageTimer = setInterval(() => {
         tomagotchi.age += 0.5;
         displayAge();
-        // if(tomagotchi.age > 7 && !morphFlag) {
-        //     morphIt();
-        // }
+        if(tomagotchi.age > 7 && !morphFlag) {
+            morphIt();
+        }
     }, 1100);
 }
 
@@ -176,7 +185,6 @@ const startGame = () => {
 
 $('.light').on('click', (e) => {
     light();
-    console.log('light');
 })
 
 $('.feed-me').on('click', (e) => {
