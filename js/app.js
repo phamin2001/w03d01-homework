@@ -20,10 +20,12 @@ const stopTimer = () => {
     clearInterval(ageTimer);
     clearInterval(sleepTimer);
     clearInterval(boredTimer);
+    clearInterval(petTimer);
 }
 
 const dieFunction = (string) => {
     alert(`${tomagotchi.name} died from ${string} !!`);
+    stopTimer();
 
 }
 
@@ -61,18 +63,6 @@ const increaseAge = () => {
     }, 1100);
 }
 
-const displayAge = () => {
-    let $bar = $('#age-num');
-
-    if(tomagotchi.age >= 15) {
-        dieFunction('age');
-        stopTimer();
-        $('.feed-me').off()
-    }
-
-    $bar.text(tomagotchi.age);
-}
-
 const feedMe = () => {
     tomagotchi.hunger -= 0.5;
     tomagotchi.hunger = Number((tomagotchi.hunger).toFixed(1));
@@ -84,12 +74,22 @@ const feedMe = () => {
     tomagotchi.boredom = Number((tomagotchi.boredom).toFixed(1));
 }
 
+const displayAge = () => {
+    let $bar = $('#age-num');
+
+    if(tomagotchi.age >= 15) {
+        dieFunction('age');
+        $('.feed-me').off()
+    }
+
+    $bar.text(tomagotchi.age);
+}
+
 const displayHungerScore = () => {
     let $bar = $('#hunger-score-bar');
     
     if(tomagotchi.hunger >= 10) {
         dieFunction('hunger');
-        stopTimer();
         $('.feed-me').off()
     }
     if(tomagotchi.hunger <= 0) {
@@ -105,7 +105,6 @@ const displaySleepScore = () => {
 
     if(tomagotchi.sleepiness >= 10) {
         dieFunction('sleep');
-        stopTimer();
         $('.feed-me').off()
     }
 
@@ -123,7 +122,6 @@ const displayBoredomScore = () => {
 
     if(tomagotchi.boredom >= 10) {
         dieFunction('bored');
-        stopTimer();
         $('.feed-me').off()
     }
 
@@ -155,14 +153,13 @@ const getName = () => {
 
 const animation = () => {
     petTimer = setInterval( () => {
-        $("#pet-live").animate({'margin-left': "+=500"}, 4000);
-        // $('#pet-live').css('-webkit-transform',`scaleX(-1)`);
-        // $('#pet-live').css('transform',`scaleX(-1)`);
-        $('#pet-live').flip();
-        $("#pet-live").animate({'margin-left': "-=500"}, 3500);
-       
+        $("#pet-live").animate({'margin-left': "+=500"}, 4000, () => {
+            $('img').removeClass('mirror');
+        });
+        $("#pet-live").animate({'margin-left': "-=500"}, 4000, () => {
+            $('img').addClass('mirror');
+        });
     }, 1500);
-   
 }
 
 const startGame = () => {
@@ -175,7 +172,6 @@ const startGame = () => {
     increaseSleep();
     increaseBored();
     increaseAge();
-
 }
 
 $('.light').on('click', (e) => {
